@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <time.h>
 
-int rand(int begin, int end)
+int rand_number(int begin, int end)
 {
     srand(time(0));
     return rand() % ((end - begin) + 1) + begin;
@@ -10,9 +10,9 @@ int rand(int begin, int end)
 
 void mode1()
 {
-    printf("I've guessed a number in range [1, 1000]. Can you guess it?\n");
+    printf("\nI've guessed a number in range [1, 1000]. Can you guess it?\n");
 
-    int guess = rand(1, 1000);
+    int guess = rand_number(1, 1000);
     int ans;
 
 #ifdef _DEBUG
@@ -41,7 +41,7 @@ void mode1()
 
 void mode2()
 {
-    printf("Please, guess a number in [1, 1000] and tell the number is (<), (=), (>)\n");
+    printf("\nPlease, guess a number in [1, 1000] and tell the number is (<), (=), (>)\n");
 
     int guess;
     char ans;
@@ -49,9 +49,9 @@ void mode2()
 
     while (true)
     {
-        guess = rand(begin, end);
+        guess = rand_number(begin, end);
 
-        printf("My guess is: %d\n", rand(begin, end));
+        printf("My guess is: %d\n", guess);
 
         scanf_s(" %c", &ans);
 
@@ -77,13 +77,13 @@ void mode2()
 
 void bootstrap()
 {
-    printf("Select mode: ");
+    printf("\nSelect mode: ");
 
-    int iMode;
-    scanf_s(" %d", &iMode);
+    int mode;
+    scanf_s(" %d", &mode);
     printf("\n");
 
-    switch (iMode)
+    switch (mode)
     {
     case 1:
         mode1();
@@ -93,6 +93,7 @@ void bootstrap()
         break;
     default:
         printf("Unknown mode\n");
+        bootstrap();
         break;
     }
 }
